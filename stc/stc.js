@@ -13,9 +13,9 @@ App.use(Bodyparser.urlencoded({
 }))
 
 let Customers = new Mongoose.Schema({
-    name: {type: String , required:true },
-    age: { type: Number , required:true },
-    country: { type: String , required:true }
+    name: { type: String, required: true },
+    age: { type: Number, required: true },
+    country: { type: String, required: true }
 })
 
 let customer = Mongoose.model('customers', Customers);
@@ -34,27 +34,25 @@ App.get('/', (req, res) => {
     res.send('hello')
 })
 
-App.put('/',(req,res) => { 
-    customer.findOneAndUpdate({name:req.body.name}, req.body, {new:true}, (err,doc) => {
-        if(!err){
+App.put('/', (req, res) => {
+    customer.findOneAndUpdate({ name: req.body.name }, req.body, { new: true }, (err, doc) => {
+        if (!err) {
             return res.send('updated')
         }
-        else
-        {
+        else {
             return res.send('update failed')
         }
     })
 })
 
-App.delete('/:id',(req,res) => {
-    customer.findByIdAndRemove(req.params.id ,(err,doc) => { 
-        if (!err){
+App.delete('/:id', (req, res) => {
+    customer.findByIdAndRemove(req.params.id, (err, doc) => {
+        if (!err) {
             return res.send('Deleted')
-        }else
-        {
+        } else {
             return res.send('could not delete')
         }
-            } )
+    })
 
 })
 
